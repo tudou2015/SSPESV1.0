@@ -21,7 +21,7 @@ function varargout = Streaming_Server_Performance(varargin)
 % 赛尔网络下一代互联网技术创新项目(NGII20180502)
 
 % Modified by hankun,zhangwensheng,chenpeiying v1.0 1-Mar-2022 10:23:12
-% Last Modified by hankun,zhangwensheng,chenpeiying v1.0 20-Mar-2022 10:54:12
+% Last Modified by hankun,zhangwensheng,chenpeiying v1.0 15-Mar-2022 10:54:12
 
 
 % 初始化
@@ -1241,16 +1241,95 @@ str_cmd=['ffplay ',file_out1];
 system(str_cmd);  
 
 
-% --- Executes on button press in pushbutton_wav_play.
-function pushbutton_wav_play_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_wav_play (see GCBO)
+% --- Executes on button press in pushbutton_file_play.
+function pushbutton_file_play_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_file_play (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 filename=handles.filename;
+
+ts = [4 8 16];
+test_t = ts(get(handles.popupmenu_t, 'value'));
+disp(test_t);
+tt=num2str(test_t);
+disp(tt);
+
+num=get(handles.popupmenu_c, 'value');
+disp(num);
+if num==1
+    test_c='1k';
+elseif num==2
+    test_c='10k';
+elseif num==3
+    test_c='100k';
+elseif num==4
+    test_c='1000k';
+else
+    test_c='100';
+end
+disp(test_c);
+% cs = [1k 10k 100k 1000k];
+% test_c = ts(get(handles.popupmenu_c, 'value'));
+disp(test_c);
+tc=num2str(test_c);
+disp(tc);
+
+num=get(handles.popupmenu_d, 'value');
+disp(num);
+if num==1
+    test_d='1s';
+elseif num==2
+    test_d='12s';
+elseif num==3
+    test_d='60s';
+elseif num==4
+    test_d='120s';
+else
+    test_d='1s';
+end
+% cs = [1s 12s 60s 120ss];
+% test_c = ts(get(handles.popupmenu_c, 'value'));
+disp(test_d);
+td=num2str(test_d);
+disp(td);
+
+ts = [5000 15000 20000  8 16];
+test_t = ts(get(handles.popupmenu_t, 'value'));
+disp(test_t);
+tt=num2str(test_t);
+disp(tt);
+
+num=get(handles.popupmenu_url, 'value');
+disp(num);
+if num==1
+    url='http://42.247.39.61/index.html';
+elseif num==2
+    url='http://[2001:DA8:D80C::a]/index.html';
+elseif num==3
+    url='http://42.247.39.61/media/video/abc.mp4';
+elseif num==4
+    url='http://[2001:DA8:D80C::a]/media/video/screen_woman.mp4';
+else
+    url='http://42.247.39.61/index.html';
+end
+disp(url);
+
+str_out= ['wrk2 ',' -t',t,' -c',c,' -d',d,' -R',R,' ',url];
+system(str_out);
+
+rates = [1000 900 800 700 600 500 400 300 200 100];
+% rates = [300 250 200 150 100 50];
+video_rate = rates(get(handles.popupmenu_mpeg2_frame25, 'value'));
+disp(video_rate);
+vr=num2str(video_rate);
+disp(vr);
+
 file_in=[filename,'.wav'];
 file_out1=[filename,'.mp3'];
 file_out2=[filename,'_mp3.wav'];
-str_cmd=['ffplay ',file_in];
+% wrk2 -t1 -c10 -d1s -R1000
+% http://42.247.39.61/media/video/screen_woman.mp4
+str_cmd=['wrk2 ',file_in];
 system(str_cmd);  
 
 
