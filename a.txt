@@ -1,0 +1,8 @@
+Running 1s test @ http://42.247.39.61/media/video2_50k_r15.mp4
+  2 threads and 16 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency      nanus     nanus   0.00us    0.00%
+    Req/Sec        nan       nan   0.00      0.00%
+  0 requests in 2.04s, 2.02MB read
+Requests/sec:      0.00
+Transfer/sec:      0.99MB

@@ -134,20 +134,69 @@ if (handles.fileLoaded==1)
 end
 
 
-% --- Executes on button press in pushbutton_mp3_generate.
-function pushbutton_mp3_generate_Callback(hObject, eventdata, handles)
+% --- Executes on button press in pushbutton_test_index_ipv4.
+function pushbutton_test_index_ipv4_Callback(hObject, eventdata, handles)
 % function pushbutton_genMp3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_mp3_generate (see GCBO)
+% hObject    handle to pushbutton_test_index_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-filename=handles.filename;
-file_in=[filename,'.wav'];
-file_out1=[filename,'.mp3'];
-file_out2=[filename,'_mp3.wav'];
-str_cmd1=['ffmpeg -i ',file_in,' -ac 1 -ar 16k ',file_out1];
-str_cmd2=['ffmpeg -i ',file_out1,' -ac 1 -ar 16k ',file_out2];
-system(str_cmd1);    
-system(str_cmd2);
+% filename=handles.filename;
+
+ts = [2 4 8 16];
+test_t = ts(get(handles.popupmenu_t, 'value'));
+disp(test_t);
+tt=num2str(test_t);
+disp(tt);
+
+num=get(handles.popupmenu_c, 'value');
+disp(num);
+if num==1
+    test_c='16';
+elseif num==2
+    test_c='100';
+elseif num==3
+    test_c='1k';
+elseif num==4
+    test_c='10k';
+else
+    test_c='16';
+end
+disp(test_c);
+tc=num2str(test_c);
+disp(tc);
+
+num=get(handles.popupmenu_d, 'value');
+disp(num);
+if num==1
+    test_d='1s';
+elseif num==2
+    test_d='12s';
+elseif num==3
+    test_d='30s';
+else
+    test_d='1s';
+end
+disp(test_d);
+td=num2str(test_d);
+disp(td);
+
+Rs = [1000 5000 15000 20000 25000 30000];
+test_R = Rs(get(handles.popupmenu_R, 'value'));
+disp(test_R);
+tR=num2str(test_R);
+disp(tR);
+
+url=get(handles.edit_url_index_ipv4,'String');
+disp(url);
+
+str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
+system(str_out);
+String a=textread('a.txt','%s');
+set(handles.listbox_test_index_ipv4,'String',a);
+set(handles.edit_qps_index_ipv4,'String',a(35,1));
+
+% handles.mHFDde_wav=m_HFD_de;
+guidata(hObject, handles);
 
 
 % --- Executes on button press in pushbutton_mp3_play.
@@ -222,9 +271,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton_mp3_calculate.
-function pushbutton_mp3_calculate_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_mp3_calculate (see GCBO)
+% --- Executes on button press in pushbutton_test_index_ipv6.
+function pushbutton_test_index_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test_index_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 filename=handles.filename;
@@ -414,8 +463,8 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 % --- Executes during object creation, after setting all properties.
-function edit67_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit67 (see GCBO)
+function edit_test_index_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_test_index_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -538,9 +587,9 @@ set(handles.edit_aac_mHFD,'string',mHFDde);
 end
     
 
-% --- Executes on button press in pushbutton_wav_generateAll.
-function pushbutton_wav_generateAll_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_wav_generateAll (see GCBO)
+% --- Executes on button press in pushbutton_test_all.
+function pushbutton_test_all_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test_all (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 filename=handles.filename;
@@ -1241,63 +1290,11 @@ str_cmd=['ffplay ',file_out1];
 system(str_cmd);  
 
 
-% --- Executes on button press in pushbutton_file_play.
-function pushbutton_file_play_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_file_play (see GCBO)
+% --- Executes on button press in pushbutton_play_url_media.
+function pushbutton_play_url_media_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_play_url_media (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-filename=handles.filename;
-
-ts = [4 8 16];
-test_t = ts(get(handles.popupmenu_t, 'value'));
-disp(test_t);
-tt=num2str(test_t);
-disp(tt);
-
-num=get(handles.popupmenu_c, 'value');
-disp(num);
-if num==1
-    test_c='1k';
-elseif num==2
-    test_c='10k';
-elseif num==3
-    test_c='100k';
-elseif num==4
-    test_c='1000k';
-else
-    test_c='100';
-end
-disp(test_c);
-% cs = [1k 10k 100k 1000k];
-% test_c = ts(get(handles.popupmenu_c, 'value'));
-disp(test_c);
-tc=num2str(test_c);
-disp(tc);
-
-num=get(handles.popupmenu_d, 'value');
-disp(num);
-if num==1
-    test_d='1s';
-elseif num==2
-    test_d='12s';
-elseif num==3
-    test_d='60s';
-elseif num==4
-    test_d='120s';
-else
-    test_d='1s';
-end
-% cs = [1s 12s 60s 120ss];
-% test_c = ts(get(handles.popupmenu_c, 'value'));
-disp(test_d);
-td=num2str(test_d);
-disp(td);
-
-ts = [5000 15000 20000  8 16];
-test_t = ts(get(handles.popupmenu_t, 'value'));
-disp(test_t);
-tt=num2str(test_t);
-disp(tt);
 
 num=get(handles.popupmenu_url, 'value');
 disp(num);
@@ -1306,31 +1303,55 @@ if num==1
 elseif num==2
     url='http://[2001:DA8:D80C::a]/index.html';
 elseif num==3
-    url='http://42.247.39.61/media/video/abc.mp4';
+    url='http://42.247.39.61/media/voice1_male.mp3';
 elseif num==4
-    url='http://[2001:DA8:D80C::a]/media/video/screen_woman.mp4';
+    url='http://[2001:DA8:D80C::a]/media/voice1_male.mp3';
+elseif num==5
+    url='http://42.247.39.61/media/image3_screen_woman.jpeg';
+elseif num==6
+    url='http://[2001:DA8:D80C::a]/media/image3_screen_woman.jpeg';
+elseif num==7
+    url='http://42.247.39.61/media/video2_50k_r15.mp4';
+elseif num==8
+    url='http://[2001:DA8:D80C::a]/media/video2_50k_r15.mp4';
 else
     url='http://42.247.39.61/index.html';
 end
 disp(url);
 
-str_out= ['wrk2 ',' -t',t,' -c',c,' -d',d,' -R',R,' ',url];
-system(str_out);
+% videofile=[url];
+% % handles.fileLoaded = 1;
+% v = VideoReader(videofile);
+% disp(v.FrameRate);
+% disp(v);
+% currAxes = handles.axes_signal;
+% while hasFrame(v)
+%     vidFrame = readFrame(v);
+%     image(vidFrame, 'Parent', currAxes);
+%     currAxes.Visible = 'off';
+%     pause(1/v.FrameRate);
+% end
 
-rates = [1000 900 800 700 600 500 400 300 200 100];
-% rates = [300 250 200 150 100 50];
-video_rate = rates(get(handles.popupmenu_mpeg2_frame25, 'value'));
-disp(video_rate);
-vr=num2str(video_rate);
-disp(vr);
+% if mp3:
+% axes(handles.axes_signal);
+% handles.Time = 0:1/Fs:(length(handles.x)-1)/Fs;
+% plot(handles.Time, handles.x);
+% axis([0 max(handles.Time) -1 1]);
+% xlabel('Time (s)')
+% ylabel('Magnitude')
+% 
+% if image:
+%     axes(handles.axes_signal);
+% imshow(image1);
 
-file_in=[filename,'.wav'];
-file_out1=[filename,'.mp3'];
-file_out2=[filename,'_mp3.wav'];
-% wrk2 -t1 -c10 -d1s -R1000
-% http://42.247.39.61/media/video/screen_woman.mp4
-str_cmd=['wrk2 ',file_in];
-system(str_cmd);  
+% if video:
+%     axes(handles.axes_signal);
+%     implay(url);
+   
+axes(handles.axes_signal);
+url_file=url;
+str_cmd=['ffplay ',url_file];
+system(str_cmd); 
 
 
 function edit_aac_8k_mse_Callback(hObject, eventdata, handles)
@@ -2358,49 +2379,92 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton_wav_calculate.
-function pushbutton_wav_calculate_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_wav_calculate (see GCBO)
+% --- Executes on button press in pushbutton_test.
+function pushbutton_test_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-filename=handles.filename;
-file_in=[filename,'.wav'];
-file_out1=[filename,'.mp3'];
-file_out2=[filename,'_mp3.wav'];
+% filename=handles.filename;
 
-% mHFD
-if ~exist(string(file_in),'file')
-    disp(['Error. \n No this file: ',string(file_out2)]);
+ts = [2 4 8 16];
+test_t = ts(get(handles.popupmenu_t, 'value'));
+disp(test_t);
+tt=num2str(test_t);
+disp(tt);
+
+num=get(handles.popupmenu_c, 'value');
+disp(num);
+if num==1
+    test_c='16';
+elseif num==2
+    test_c='100';
+elseif num==3
+    test_c='1k';
+elseif num==4
+    test_c='10k';
 else
-    [x fs]=audioread(file_in);
-    x=x(:,1);
-%     disp(x);
-    tt=length(x)/fs;
-    start_time = 0;
-    end_time = tt;
-    sig=x((fs*start_time+1):fs*end_time);
-    xx=double(sig);
-    
-    win=1600;step=800;
-    xx_left=[0,0,0,0,0,0,0,0]';
-    xx_0=[xx_left;xx(1:end-8)];
-    xx_1=xx;
-    xx_2=[xx(9:end);xx_left];
+    test_c='16';
+end
+disp(test_c);
+tc=num2str(test_c);
+disp(tc);
 
-    [HBH_de_0]=FD_HBH(xx_0,win,step);
-    [HBH_de_1]=FD_HBH(xx_1,win,step);
-    [HBH_de_2]=FD_HBH(xx_2,win,step);
-    HBH1600800de=(HBH_de_0+HBH_de_1+HBH_de_2)/3;
-    HBH1600800de_mean=mean(HBH1600800de);
-    
-m_HFD_de=HBH1600800de_mean;
-set(handles.edit_wav_mHFD,'string',m_HFD_de);
-disp(m_HFD_de);
+num=get(handles.popupmenu_d, 'value');
+disp(num);
+if num==1
+    test_d='1s';
+elseif num==2
+    test_d='12s';
+elseif num==3
+    test_d='30s';
+else
+    test_d='1s';
+end
+disp(test_d);
+td=num2str(test_d);
+disp(td);
 
-handles.mHFDde_wav=m_HFD_de;
+Rs = [1000 5000 15000 20000 25000 30000];
+test_R = Rs(get(handles.popupmenu_R, 'value'));
+disp(test_R);
+tR=num2str(test_R);
+disp(tR);
+
+num=get(handles.popupmenu_url, 'value');
+disp(num);
+if num==1
+    url='http://42.247.39.61/index.html';
+elseif num==2
+    url='http://[2001:DA8:D80C::a]/index.html';
+elseif num==3
+    url='http://42.247.39.61/media/voice1_male.mp3';
+elseif num==4
+    url='http://[2001:DA8:D80C::a]/media/voice1_male.mp3';
+elseif num==5
+    url='http://42.247.39.61/media/image3_screen_woman.jpeg';
+elseif num==6
+    url='http://[2001:DA8:D80C::a]/media/image3_screen_woman.jpeg';
+elseif num==7
+    url='http://42.247.39.61/media/video2_50k_r15.mp4';
+elseif num==8
+    url='http://[2001:DA8:D80C::a]/media/video2_50k_r15.mp4';
+else
+    url='http://42.247.39.61/index.html';
+end
+disp(url);
+
+
+str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
+system(str_out);
+a=textread('a.txt','%s');
+disp(a);
+set(handles.listbox_test_index_ipv4,'String',a);
+set(handles.edit_qps,'String',a(35,1));
+
+
+% handles.mHFDde_wav=m_HFD_de;
 guidata(hObject, handles);
 
-end
 
 
 % --- Executes on button press in pushbutton_wav_8k_load.
@@ -2632,19 +2696,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu6.
-function popupmenu6_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu6 (see GCBO)
+% --- Executes on selection change in popupmenu_t.
+function popupmenu_t_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_t (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu6 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu6
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_t contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_t
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu6_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu6 (see GCBO)
+function popupmenu_t_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_t (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2655,19 +2719,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu7.
-function popupmenu7_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu7 (see GCBO)
+% --- Executes on selection change in popupmenu_c.
+function popupmenu_c_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_c (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu7 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu7
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_c contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_c
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu7_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu7 (see GCBO)
+function popupmenu_c_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_c (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2678,19 +2742,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu8.
-function popupmenu8_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu8 (see GCBO)
+% --- Executes on selection change in popupmenu_d.
+function popupmenu_d_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_d (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu8 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu8
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_d contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_d
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu8_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu8 (see GCBO)
+function popupmenu_d_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_d (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2701,19 +2765,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu9.
-function popupmenu9_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu9 (see GCBO)
+% --- Executes on selection change in popupmenu_R.
+function popupmenu_R_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_R (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu9 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu9
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_R contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_R
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu9_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu9 (see GCBO)
+function popupmenu_R_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_R (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2817,28 +2881,28 @@ end
 
 
 
-function edit67_Callback(hObject, eventdata, handles)
-% hObject    handle to edit67 (see GCBO)
+function edit_test_index_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_test_index_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit67 as text
-%        str2double(get(hObject,'String')) returns contents of edit67 as a double
+% Hints: get(hObject,'String') returns contents of edit_test_index_ipv4 as text
+%        str2double(get(hObject,'String')) returns contents of edit_test_index_ipv4 as a double
 
 
 
-function edit68_Callback(hObject, eventdata, handles)
-% hObject    handle to edit68 (see GCBO)
+function edit_url_index_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit68 as text
-%        str2double(get(hObject,'String')) returns contents of edit68 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_index_ipv6 as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_index_ipv6 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit68_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit68 (see GCBO)
+function edit_url_index_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2850,18 +2914,18 @@ end
 
 
 
-function edit69_Callback(hObject, eventdata, handles)
-% hObject    handle to edit69 (see GCBO)
+function edit_url_index_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit69 as text
-%        str2double(get(hObject,'String')) returns contents of edit69 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_index_ipv4 as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_index_ipv4 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit69_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit69 (see GCBO)
+function edit_url_index_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2880,18 +2944,18 @@ function pushbutton46_Callback(hObject, eventdata, handles)
 
 
 
-function edit70_Callback(hObject, eventdata, handles)
-% hObject    handle to edit70 (see GCBO)
+function edit_test_media_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_test_media_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit70 as text
-%        str2double(get(hObject,'String')) returns contents of edit70 as a double
+% Hints: get(hObject,'String') returns contents of edit_test_media_ipv4 as text
+%        str2double(get(hObject,'String')) returns contents of edit_test_media_ipv4 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit70_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit70 (see GCBO)
+function edit_test_media_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_test_media_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2903,18 +2967,18 @@ end
 
 
 
-function edit71_Callback(hObject, eventdata, handles)
-% hObject    handle to edit71 (see GCBO)
+function edit_url_media_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit71 as text
-%        str2double(get(hObject,'String')) returns contents of edit71 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_media_ipv6 as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_media_ipv6 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit71_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit71 (see GCBO)
+function edit_url_media_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2926,18 +2990,18 @@ end
 
 
 
-function edit72_Callback(hObject, eventdata, handles)
-% hObject    handle to edit72 (see GCBO)
+function edit_url_media_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_media_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit72 as text
-%        str2double(get(hObject,'String')) returns contents of edit72 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_media_ipv4 as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_media_ipv4 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit72_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit72 (see GCBO)
+function edit_url_media_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_media_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2949,18 +3013,18 @@ end
 
 
 
-function edit74_Callback(hObject, eventdata, handles)
-% hObject    handle to edit74 (see GCBO)
+function edit_test_media_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_test_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit74 as text
-%        str2double(get(hObject,'String')) returns contents of edit74 as a double
+% Hints: get(hObject,'String') returns contents of edit_test_media_ipv6 as text
+%        str2double(get(hObject,'String')) returns contents of edit_test_media_ipv6 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit74_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit74 (see GCBO)
+function edit_test_media_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_test_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2971,26 +3035,26 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton47.
-function pushbutton47_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton47 (see GCBO)
+% --- Executes on button press in pushbutton_test_media_ipv4.
+function pushbutton_test_media_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test_media_ipv4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
 
-function edit73_Callback(hObject, eventdata, handles)
-% hObject    handle to edit73 (see GCBO)
+function edit_test_index_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_test_index_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit73 as text
-%        str2double(get(hObject,'String')) returns contents of edit73 as a double
+% Hints: get(hObject,'String') returns contents of edit_test_index_ipv6 as text
+%        str2double(get(hObject,'String')) returns contents of edit_test_index_ipv6 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit73_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit73 (see GCBO)
+function edit_test_index_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_test_index_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3001,26 +3065,26 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton48.
-function pushbutton48_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton48 (see GCBO)
+% --- Executes on button press in pushbutton_test_media_ipv6.
+function pushbutton_test_media_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on selection change in popupmenu14.
-function popupmenu14_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu14 (see GCBO)
+% --- Executes on selection change in popupmenu_url.
+function popupmenu_url_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_url (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu14 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu14
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_url contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_url
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu14_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu14 (see GCBO)
+function popupmenu_url_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_url (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3031,9 +3095,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on key press with focus on pushbutton_mp3_calculate and none of its controls.
-function pushbutton_mp3_calculate_KeyPressFcn(hObject, eventdata, handles)
-% hObject    handle to pushbutton_mp3_calculate (see GCBO)
+% --- Executes on key press with focus on pushbutton_test_index_ipv6 and none of its controls.
+function pushbutton_test_index_ipv6_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test_index_ipv6 (see GCBO)
 % eventdata  structure with the following fields (see MATLAB.UI.CONTROL.UICONTROL)
 %	Key: name of the key that was pressed, in lower case
 %	Character: character interpretation of the key(s) that was pressed
@@ -3065,18 +3129,18 @@ end
 
 
 
-function edit80_Callback(hObject, eventdata, handles)
-% hObject    handle to edit80 (see GCBO)
+function edit_url_ipv6_dpdk_nginx_media_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv6_dpdk_nginx_media (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit80 as text
-%        str2double(get(hObject,'String')) returns contents of edit80 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_ipv6_dpdk_nginx_media as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_ipv6_dpdk_nginx_media as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit80_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit80 (see GCBO)
+function edit_url_ipv6_dpdk_nginx_media_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv6_dpdk_nginx_media (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3088,18 +3152,18 @@ end
 
 
 
-function edit81_Callback(hObject, eventdata, handles)
-% hObject    handle to edit81 (see GCBO)
+function edit_url_ipv4_dpdp_nginx_media_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv4_dpdp_nginx_media (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit81 as text
-%        str2double(get(hObject,'String')) returns contents of edit81 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_ipv4_dpdp_nginx_media as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_ipv4_dpdp_nginx_media as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit81_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit81 (see GCBO)
+function edit_url_ipv4_dpdp_nginx_media_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv4_dpdp_nginx_media (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3161,26 +3225,26 @@ function pushbutton52_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton53.
-function pushbutton53_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton53 (see GCBO)
+% --- Executes on button press in pushbutton_test_dpdk_nginx.
+function pushbutton_test_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_test_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on selection change in popupmenu15.
-function popupmenu15_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu15 (see GCBO)
+% --- Executes on selection change in popupmenu_t_dpdk_nginx.
+function popupmenu_t_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_t_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu15 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu15
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_t_dpdk_nginx contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_t_dpdk_nginx
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu15_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu15 (see GCBO)
+function popupmenu_t_dpdk_nginx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_t_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3191,19 +3255,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu16.
-function popupmenu16_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu16 (see GCBO)
+% --- Executes on selection change in popupmenu_c_dpdk_nginx.
+function popupmenu_c_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_c_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu16 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu16
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_c_dpdk_nginx contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_c_dpdk_nginx
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu16_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu16 (see GCBO)
+function popupmenu_c_dpdk_nginx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_c_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3214,19 +3278,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu17.
-function popupmenu17_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu17 (see GCBO)
+% --- Executes on selection change in popupmenu_d_dpdk_nginx.
+function popupmenu_d_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_d_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu17 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu17
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_d_dpdk_nginx contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_d_dpdk_nginx
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu17_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu17 (see GCBO)
+function popupmenu_d_dpdk_nginx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_d_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3237,19 +3301,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu18.
-function popupmenu18_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu18 (see GCBO)
+% --- Executes on selection change in popupmenu_R_dpdk_nginx.
+function popupmenu_R_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_R_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu18 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu18
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_R_dpdk_nginx contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_R_dpdk_nginx
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu18_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu18 (see GCBO)
+function popupmenu_R_dpdk_nginx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_R_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3260,19 +3324,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in popupmenu19.
-function popupmenu19_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu19 (see GCBO)
+% --- Executes on selection change in popupmenu_url_dpdk_nginx.
+function popupmenu_url_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu_url_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu19 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu19
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu_url_dpdk_nginx contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu_url_dpdk_nginx
 
 
 % --- Executes during object creation, after setting all properties.
-function popupmenu19_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu19 (see GCBO)
+function popupmenu_url_dpdk_nginx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu_url_dpdk_nginx (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3321,18 +3385,18 @@ end
 
 
 
-function edit76_Callback(hObject, eventdata, handles)
-% hObject    handle to edit76 (see GCBO)
+function edit_url_ipv6_dpdp_nginx_index_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv6_dpdp_nginx_index (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit76 as text
-%        str2double(get(hObject,'String')) returns contents of edit76 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_ipv6_dpdp_nginx_index as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_ipv6_dpdp_nginx_index as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit76_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit76 (see GCBO)
+function edit_url_ipv6_dpdp_nginx_index_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv6_dpdp_nginx_index (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3344,18 +3408,18 @@ end
 
 
 
-function edit77_Callback(hObject, eventdata, handles)
-% hObject    handle to edit77 (see GCBO)
+function edit_url_ipv4_dpdp_nginx_index_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv4_dpdp_nginx_index (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit77 as text
-%        str2double(get(hObject,'String')) returns contents of edit77 as a double
+% Hints: get(hObject,'String') returns contents of edit_url_ipv4_dpdp_nginx_index as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_ipv4_dpdp_nginx_index as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit77_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit77 (see GCBO)
+function edit_url_ipv4_dpdp_nginx_index_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_ipv4_dpdp_nginx_index (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -3383,6 +3447,328 @@ function edit78_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_qps_index_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_qps_index_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_qps_index_ipv4 as text
+%        str2double(get(hObject,'String')) returns contents of edit_qps_index_ipv4 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_qps_index_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_qps_index_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit89_Callback(hObject, eventdata, handles)
+% hObject    handle to edit89 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit89 as text
+%        str2double(get(hObject,'String')) returns contents of edit89 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit89_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit89 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit90_Callback(hObject, eventdata, handles)
+% hObject    handle to edit90 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit90 as text
+%        str2double(get(hObject,'String')) returns contents of edit90 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit90_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit90 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit87_Callback(hObject, eventdata, handles)
+% hObject    handle to edit87 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit87 as text
+%        str2double(get(hObject,'String')) returns contents of edit87 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit87_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit87 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit88_Callback(hObject, eventdata, handles)
+% hObject    handle to edit88 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit88 as text
+%        str2double(get(hObject,'String')) returns contents of edit88 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit88_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit88 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_qps_meida_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_qps_meida_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_qps_meida_ipv4 as text
+%        str2double(get(hObject,'String')) returns contents of edit_qps_meida_ipv4 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_qps_meida_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_qps_meida_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_qps_media_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_qps_media_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_qps_media_ipv6 as text
+%        str2double(get(hObject,'String')) returns contents of edit_qps_media_ipv6 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_qps_media_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_qps_media_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_qps_index_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_qps_index_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_qps_index_ipv6 as text
+%        str2double(get(hObject,'String')) returns contents of edit_qps_index_ipv6 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_qps_index_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_qps_index_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_qps_dpdk_nginx_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_qps_dpdk_nginx (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_qps_dpdk_nginx as text
+%        str2double(get(hObject,'String')) returns contents of edit_qps_dpdk_nginx as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_qps_dpdk_nginx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_qps_dpdk_nginx (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_qps_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_qps (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_qps as text
+%        str2double(get(hObject,'String')) returns contents of edit_qps as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_qps_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_qps (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in listbox_test_index_ipv4.
+function listbox_test_index_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox_test_index_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_index_ipv4 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox_test_index_ipv4
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox_test_index_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox_test_index_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in listbox_test_index_ipv6.
+function listbox_test_index_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox_test_index_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_index_ipv6 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox_test_index_ipv6
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox_test_index_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox_test_index_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in listbox_test_media_ipv4.
+function listbox_test_media_ipv4_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox_test_media_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_media_ipv4 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox_test_media_ipv4
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox_test_media_ipv4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox_test_media_ipv4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in listbox_test_meida_ipv6.
+function listbox_test_meida_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox_test_meida_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_meida_ipv6 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox_test_meida_ipv6
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox_test_meida_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox_test_meida_ipv6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');

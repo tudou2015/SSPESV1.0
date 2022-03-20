@@ -1,0 +1,8 @@
+Running 1s test @ http://42.247.39.61/index.html
+  2 threads and 16 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   185.08ms   86.51ms 377.34ms   58.30%
+    Req/Sec        nan       nan   0.00      0.00%
+  659 requests in 1.00s, 548.95KB read
+Requests/sec:    658.70
+Transfer/sec:    548.70KB
