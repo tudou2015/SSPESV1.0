@@ -128,7 +128,7 @@ disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -224,7 +224,7 @@ disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -869,7 +869,7 @@ disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -974,7 +974,7 @@ disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -1057,18 +1057,18 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-function edit_url_medai_ipv4_dpdp_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_url_medai_ipv4_dpdp (see GCBO)
+function edit_url_media_ipv4_dpdk_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_media_ipv4_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit_url_medai_ipv4_dpdp as text
-%        str2double(get(hObject,'String')) returns contents of edit_url_medai_ipv4_dpdp as a double
+% Hints: get(hObject,'String') returns contents of edit_url_media_ipv4_dpdk as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_media_ipv4_dpdk as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_url_medai_ipv4_dpdp_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_url_medai_ipv4_dpdp (see GCBO)
+function edit_url_media_ipv4_dpdk_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_media_ipv4_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -1129,12 +1129,12 @@ disp(test_R);
 tR=num2str(test_R);
 disp(tR);
 
-url=get(handles.edit_url_index_ipv4_dpdk,'String');
+url=get(handles.edit_url_media_ipv4_dpdk,'String');
 disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -1212,12 +1212,12 @@ disp(test_R);
 tR=num2str(test_R);
 disp(tR);
 
-url=get(handles.edit_url_index_ipv4_dpdk,'String');
+url=get(handles.edit_url_media_ipv6_dpdk,'String');
 disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -1728,7 +1728,7 @@ disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -1806,12 +1806,12 @@ disp(test_R);
 tR=num2str(test_R);
 disp(tR);
 
-url=get(handles.edit_url_index_ipv4_dpdk,'String');
+url=get(handles.edit_url_index_ipv6_dpdk,'String');
 disp(url);
 
 str_out= ['./wrk ',' -t',tt,' -c',tc,' -d',td,' -R',tR,' ',url,' >a.txt'];
 system(str_out);
-String a=textread('a.txt','%s');
+a=textread('a.txt','%s');
 
 % 存入文件
 % url,t,c,d,R,R_result
@@ -1839,18 +1839,18 @@ set(handles.edit_qps_index_ipv6_dpdk,'String',a(35,1));
 % guidata(hObject, handles);
 
 
-function edit_url_index_ipv6_dpdp_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_url_index_ipv6_dpdp (see GCBO)
+function edit_url_index_ipv6_dpdk_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv6_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit_url_index_ipv6_dpdp as text
-%        str2double(get(hObject,'String')) returns contents of edit_url_index_ipv6_dpdp as a double
+% Hints: get(hObject,'String') returns contents of edit_url_index_ipv6_dpdk as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_index_ipv6_dpdk as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_url_index_ipv6_dpdp_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_url_index_ipv6_dpdp (see GCBO)
+function edit_url_index_ipv6_dpdk_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv6_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -1861,18 +1861,18 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-function edit_url_index_ipv4_dpdp_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_url_index_ipv4_dpdp (see GCBO)
+function edit_url_index_ipv4_dpdk_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv4_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit_url_index_ipv4_dpdp as text
-%        str2double(get(hObject,'String')) returns contents of edit_url_index_ipv4_dpdp as a double
+% Hints: get(hObject,'String') returns contents of edit_url_index_ipv4_dpdk as text
+%        str2double(get(hObject,'String')) returns contents of edit_url_index_ipv4_dpdk as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_url_index_ipv4_dpdp_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_url_index_ipv4_dpdp (see GCBO)
+function edit_url_index_ipv4_dpdk_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_url_index_ipv4_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2172,19 +2172,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in listbox_test_meida_ipv6.
-function listbox_test_meida_ipv6_Callback(hObject, eventdata, handles)
-% hObject    handle to listbox_test_meida_ipv6 (see GCBO)
+% --- Executes on selection change in listbox_test_media_ipv6.
+function listbox_test_media_ipv6_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox_test_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_meida_ipv6 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from listbox_test_meida_ipv6
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_media_ipv6 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox_test_media_ipv6
 
 
 % --- Executes during object creation, after setting all properties.
-function listbox_test_meida_ipv6_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to listbox_test_meida_ipv6 (see GCBO)
+function listbox_test_media_ipv6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox_test_media_ipv6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2195,19 +2195,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in listbox_media_ipv4_dpdk.
-function listbox_media_ipv4_dpdk_Callback(hObject, eventdata, handles)
-% hObject    handle to listbox_media_ipv4_dpdk (see GCBO)
+% --- Executes on selection change in listbox_test_media_ipv4_dpdk.
+function listbox_test_media_ipv4_dpdk_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox_test_media_ipv4_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns listbox_media_ipv4_dpdk contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from listbox_media_ipv4_dpdk
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox_test_media_ipv4_dpdk contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox_test_media_ipv4_dpdk
 
 
 % --- Executes during object creation, after setting all properties.
-function listbox_media_ipv4_dpdk_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to listbox_media_ipv4_dpdk (see GCBO)
+function listbox_test_media_ipv4_dpdk_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox_test_media_ipv4_dpdk (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -2331,4 +2331,3 @@ function listbox_test_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
